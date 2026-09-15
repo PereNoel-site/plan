@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import equipe from '../images/equipe.jpg';
+---
+
+<section class="about">
+  <div>
+    <h6 class="eyebrow">À propos</h6>
+    <h2 class="title">Une petite équipe, basée en France</h2>
+    <p>
+      Plan Naturel est une équipe de passionnés, engagée dans chaque projet. Notre mission est simple : valoriser vos
+      espaces et faciliter l'expérience de vos visiteurs grâce à des plans clairs, esthétiques et adaptés à votre
+      identité.
+    </p>
+    <p>
+      Nous travaillons avec des campings indépendants comme avec des groupes, des villages vacances, des aires de
+      camping-car, des parcs de loisirs et des collectivités.
+    </p>
+    <p>
+      Diplômés en gestion de projet digital, nous allons aussi au-delà du plan : création de sites internet,
+      référencement local et accompagnement sur vos outils de communication.
+    </p>
+  </div>
+  <figure>
+    <Image src={equipe} alt="Pierre-Nicolas et Amandine, PN Production" width={640} />
+    <figcaption>Pierre-Nicolas et Amandine — PN Production</figcaption>
+  </figure>
+</section>
+
+<style>
+  .about {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 88px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 44px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-700);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(28px, 3vw, 38px);
+    max-width: 20ch;
+  }
+
+  .about p {
+    color: var(--color-neutral-800);
+    max-width: 52ch;
+    margin-top: 14px;
+  }
+
+  figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  figure :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  figcaption {
+    font-size: 14px;
+    color: var(--color-neutral-700);
+  }
+</style>

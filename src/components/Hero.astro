@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+import heroPlan from '../images/hero-plan.png';
+---
+
+<section id="top" class="hero">
+  <div class="hero-text">
+    <span class="tag tag-accent-2">Plan de camping sur mesure · France</span>
+    <h1>Vos vacanciers trouvent leur emplacement du <i>premier coup&nbsp;d'œil.</i></h1>
+    <p class="lead">
+      Nous dessinons le plan de votre établissement — chaque allée, chaque emplacement, chaque service —
+      dans un visuel clair et à votre image. Papier, panneau d'accueil, site web&nbsp;: un seul plan, tous vos supports.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#devis">Demander un devis gratuit</a>
+      <a class="btn btn-secondary" href="#realisations">Voir des plans réalisés</a>
+    </div>
+    <p class="hero-note">À partir de <strong>150 €</strong> pour un camping jusqu'à 49 emplacements.</p>
+  </div>
+  <div class="hero-visual">
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
+    <figure class="hero-figure">
+      <Image src={heroPlan} alt="Plan du camping Le Grand Pré" class="washed" width={900} />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 64px 24px 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 48px;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.08;
+    margin: 18px 0 20px;
+    text-wrap: pretty;
+  }
+
+  .lead {
+    font-size: 18px;
+    max-width: 46ch;
+    color: var(--color-neutral-800);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  .hero-note {
+    margin-top: 26px;
+    font-size: 14px;
+    color: var(--color-neutral-700);
+  }
+
+  .hero-visual {
+    position: relative;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 999px;
+    z-index: 0;
+  }
+
+  .blob-1 {
+    width: 220px;
+    height: 220px;
+    background: var(--color-accent-2-200);
+    top: -34px;
+    right: -50px;
+  }
+
+  .blob-2 {
+    width: 120px;
+    height: 120px;
+    background: var(--color-accent-200);
+    bottom: -30px;
+    left: -34px;
+  }
+
+  .hero-figure {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: #faf5ec;
+  }
+
+  .hero-figure :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+      order: 2;
+    }
+  }
+</style>

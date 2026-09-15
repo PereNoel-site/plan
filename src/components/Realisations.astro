@@ -1,0 +1,213 @@
+---
+import { Image } from 'astro:assets';
+import planGrandPre from '../images/plan-grand-pre.png';
+import planVarennes from '../images/plan-les-varennes.png';
+import planDomaine from '../images/plan-grand-camping.png';
+
+const plans = [
+  {
+    id: 'grand-pre',
+    image: planGrandPre,
+    title: 'Le Grand Pré',
+    subtitle: 'Emplacements nus et locatifs, secteurs A à H',
+    tags: ['Plan 2D', 'Légende bilingue'],
+  },
+  {
+    id: 'varennes',
+    image: planVarennes,
+    title: 'Les Varennes',
+    subtitle: "139 emplacements, 13 catégories d'hébergements",
+    tags: ['Plan 2D', 'Double légende personnalisée', 'Catégories couleur'],
+  },
+  {
+    id: 'domaine',
+    image: planDomaine,
+    title: 'Yellow Village! Le Jard ',
+    subtitle: 'Plus de 800 emplacements répartis en huit secteurs',
+    tags: ['Plan 2D', 'Catégories couleur'],
+  },
+];
+---
+
+<section id="realisations" class="realisations">
+  <h6 class="eyebrow">Réalisations</h6>
+  <h2 class="title">Des plans lus par des milliers de vacanciers chaque saison</h2>
+  <p class="subtitle">Cliquez sur un plan pour l'agrandir.</p>
+
+  <div class="grid">
+    {plans.map((p) => (
+      <button type="button" class="plan-card elev-sm" data-open-dialog={`dialog-${p.id}`}>
+        <div class="plan-thumb">
+          <Image src={p.image} alt={`Plan du camping ${p.title}`} class="washed" width={640} />
+        </div>
+        <div class="plan-body">
+          <div class="plan-title">{p.title}</div>
+          <div class="plan-subtitle">{p.subtitle}</div>
+          <div class="plan-tags">
+            {p.tags.map((t) => (
+              <span class="tag tag-outline">{t}</span>
+            ))}
+          </div>
+        </div>
+      </button>
+    ))}
+  </div>
+
+  {plans.map((p) => (
+    <dialog id={`dialog-${p.id}`} class="plan-dialog">
+      <div class="dialog-head">
+        <div class="dialog-title">{p.title}</div>
+        <button type="button" class="btn btn-ghost" data-close-dialog>Fermer</button>
+      </div>
+      <div class="dialog-image">
+        <Image src={p.image} alt={`Plan du camping ${p.title}`} width={1400} />
+      </div>
+    </dialog>
+  ))}
+</section>
+
+<style>
+  .realisations {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 24px 24px 72px;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-700);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(30px, 3.4vw, 42px);
+    max-width: 22ch;
+  }
+
+  .subtitle {
+    max-width: 56ch;
+    color: var(--color-neutral-800);
+    margin: 12px 0 32px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+  }
+
+  .plan-card {
+    display: block;
+    text-align: left;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    font-family: var(--font-body);
+    color: var(--color-text);
+  }
+
+  .plan-thumb {
+    aspect-ratio: 4 / 3;
+    background: #faf5ec;
+    overflow: hidden;
+  }
+
+  .plan-thumb :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .plan-body {
+    padding: 20px 22px 22px;
+  }
+
+  .plan-title {
+    font-family: var(--font-heading);
+    font-size: 21px;
+  }
+
+  .plan-subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--color-neutral-700);
+  }
+
+  .plan-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .plan-dialog {
+    max-width: 1100px;
+    width: calc(100% - 48px);
+    max-height: 88vh;
+    overflow: auto;
+    border-radius: var(--radius-lg);
+    border: 0;
+    padding: 24px;
+    background: var(--color-bg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .plan-dialog::backdrop {
+    background: color-mix(in srgb, var(--color-neutral-900) 55%, transparent);
+  }
+
+  .dialog-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .dialog-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    margin-right: auto;
+  }
+
+  .dialog-image {
+    margin-top: 16px;
+    background: #faf5ec;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .dialog-image :global(img) {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-open-dialog]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-open-dialog');
+      const dialog = id && document.getElementById(id);
+      if (dialog instanceof HTMLDialogElement) {
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  document.querySelectorAll<HTMLDialogElement>('.plan-dialog').forEach((dialog) => {
+    const close = () => {
+      dialog.close();
+    };
+
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = '';
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+
+    dialog.querySelector('[data-close-dialog]')?.addEventListener('click', close);
+  });
+</script>

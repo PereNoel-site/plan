@@ -1,0 +1,91 @@
+---
+import logo from '../images/logo.png';
+import { Image } from 'astro:assets';
+
+const links = [
+  { href: '#realisations', label: 'Réalisations' },
+  { href: '#prestations', label: 'Prestations' },
+  { href: '#tarifs', label: 'Tarifs' },
+  { href: '#methode', label: 'Méthode' },
+  { href: '#faq', label: 'FAQ' },
+];
+---
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="#top" class="brand">
+      <Image src={logo} alt="Plan au Naturel — PN Production" height={30} width={30} />
+      <span class="brand-name">Plan Naturel</span>
+    </a>
+    <nav class="nav">
+      {links.map((l) => (
+        <a href={l.href}>{l.label}</a>
+      ))}
+    </nav>
+    <a class="btn btn-primary" href="#devis">Demander un devis</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 14px 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--color-text);
+    margin-right: auto;
+  }
+
+  .brand :global(img) {
+    height: 30px;
+    width: auto;
+  }
+
+  .brand-name {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    letter-spacing: -0.02em;
+  }
+
+  .nav {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .nav a:hover {
+    color: var(--color-accent-700);
+  }
+
+  @media (max-width: 720px) {
+    .nav {
+      gap: 14px;
+      order: 3;
+      width: 100%;
+    }
+  }
+</style>

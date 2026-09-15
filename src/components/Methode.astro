@@ -1,0 +1,72 @@
+---
+const etapes = [
+  { n: 1, title: 'Échange', body: 'Un appel de vingt minutes : vos supports actuels, vos catégories d’emplacements, ce qui coince à l’accueil.' },
+  { n: 2, title: 'Relevé', body: 'Nous partons de vos plans cadastraux, photos aériennes et de votre liste d’emplacements. Aucun déplacement nécessaire.' },
+  { n: 3, title: 'Dessin', body: 'Une première maquette complète, puis deux tours de corrections pour ajuster numéros, teintes et légende.' },
+  { n: 4, title: 'Livraison', body: 'Fichiers print haute définition, versions web et, en option, le plan interactif et vos panneaux prêts à produire.' },
+];
+---
+
+<section id="methode" class="methode">
+  <div class="container">
+    <h6 class="eyebrow">Méthode</h6>
+    <h2 class="title">Quatre étapes, du premier appel au fichier prêt à imprimer</h2>
+    <div class="grid">
+      {etapes.map((e) => (
+        <div>
+          <div class="step-number">{e.n}</div>
+          <h4 class="step-title">{e.title}</h4>
+          <p class="step-body">{e.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .methode {
+    background: var(--color-surface);
+    padding: 72px 0;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-700);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(30px, 3.4vw, 42px);
+    max-width: 26ch;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 26px;
+    margin-top: 40px;
+  }
+
+  .step-number {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    background: var(--color-accent-2-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 26px;
+    color: var(--color-accent-2-900);
+  }
+
+  .step-title {
+    margin-top: 18px;
+    font-size: 20px;
+  }
+
+  .step-body {
+    margin-top: 8px;
+    font-size: 15px;
+    color: var(--color-neutral-800);
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import planVarennes from '../images/plan-les-varennes.png';
+---
+
+<section class="avant-apres">
+  <h6 class="eyebrow">Avant / après</h6>
+  <h2 class="title">Du plan photocopié depuis quinze ans au plan qu'on garde</h2>
+  <div class="grid">
+    <figure>
+      <div class="frame frame-placeholder">
+        <span>Ancien plan client</span>
+      </div>
+      <figcaption>Avant — le plan d'origine du camping</figcaption>
+    </figure>
+    <figure>
+      <div class="frame frame-after">
+        <Image src={planVarennes} alt="Plan redessiné du camping Les Varennes" class="washed" width={640} />
+      </div>
+      <figcaption>Après — Les Varennes, 139 emplacements et 13 catégories d'hébergements</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .avant-apres {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 72px 24px;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-700);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(30px, 3.4vw, 42px);
+    max-width: 26ch;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 26px;
+    margin-top: 34px;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  .frame {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .frame-placeholder {
+    background: var(--color-neutral-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-600);
+    font-size: 13px;
+    text-align: center;
+    padding: 24px;
+  }
+
+  .frame-after {
+    background: #faf5ec;
+    box-shadow: var(--shadow-md);
+  }
+
+  .frame-after :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

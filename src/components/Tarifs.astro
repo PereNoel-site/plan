@@ -1,0 +1,309 @@
+<section id="tarifs" class="tarifs">
+  <h6 class="eyebrow">Tarifs</h6>
+  <h2 class="title">Un prix à l'emplacement, annoncé d'avance</h2>
+  <p class="intro">
+    Un forfait de base, puis des paliers progressifs : chaque tranche d'emplacements est facturée à son propre tarif,
+    afin que les petites structures puissent elles aussi se payer les services d'un plan haut de gamme.
+    Pas d'abonnement, pas de frais cachés.
+  </p>
+
+  <div class="tarifs-grid">
+    <div class="tables">
+      <table class="table">
+        <thead>
+          <tr><th>Plan 2D simple</th><th class="right">Tarif</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Socle, jusqu'à 49 emplacements</td><td class="right nowrap">150 € <span class="text-muted">forfait</span></td></tr>
+          <tr><td>Tranche 50 → 100</td><td class="right nowrap">+3 € / empl.</td></tr>
+          <tr><td>Tranche 101 → 200</td><td class="right nowrap">+2 € / empl.</td></tr>
+          <tr><td>Au-delà de 200</td><td class="right nowrap">+1 € / empl.</td></tr>
+          <tr><td colspan="2" class="text-muted example">Exemple : 150 emplacements = 150 € + (51 × 3 €) + (50 × 2 €) = 403 €</td></tr>
+        </tbody>
+      </table>
+
+      <table class="table" style="margin-top: 26px;">
+        <thead>
+          <tr><th>Frais complémentaires</th><th class="right">Tarif</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Ouverture de dossier <span class="text-muted">(par nouveau projet)</span></td><td class="right nowrap">50 €</td></tr>
+          <tr><td>Légende personnalisée</td><td class="right nowrap">+150 €</td></tr>
+          <tr><td>Plan 3D</td><td class="right nowrap">+500 €</td></tr>
+          <tr><td>Suivi et mises à jour</td><td class="right nowrap">sur devis</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="simulator" id="simulator">
+      <h4>Estimez votre plan</h4>
+      <p class="sim-note">Une estimation indicative, confirmée après le relevé.</p>
+
+      <label class="sim-label" for="sim-range">Nombre d'emplacements</label>
+      <div class="sim-count">
+        <span id="sim-n-display">120</span>
+        <span class="sim-unit">emplacements</span>
+      </div>
+      <input type="range" id="sim-range" min="10" max="1000" step="5" value="120" />
+      <div class="sim-scale">
+        <span>10</span><span>1000</span>
+      </div>
+
+      <div class="sim-options">
+        <label class="sim-checkbox">
+          <input type="checkbox" id="sim-legende" />
+          Légende personnalisée <span class="text-muted">+150 €</span>
+        </label>
+        <label class="sim-checkbox">
+          <input type="checkbox" id="sim-plan3d" />
+          Plan 3D <span class="text-muted">+500 €</span>
+        </label>
+      </div>
+
+      <div class="sim-lines" id="sim-lines"></div>
+
+      <div class="sim-total-row">
+        <span class="sim-total-label">Estimation</span>
+        <span class="sim-total" id="sim-total">0&nbsp;€</span>
+      </div>
+      <a class="btn btn-primary btn-block" href="#devis">Faire chiffrer précisément</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tarifs {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 72px 24px;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-700);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(30px, 3.4vw, 42px);
+    max-width: 24ch;
+  }
+
+  .intro {
+    max-width: 58ch;
+    color: var(--color-neutral-800);
+    margin-top: 12px;
+  }
+
+  .tarifs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 26px;
+    margin-top: 36px;
+    align-items: start;
+  }
+
+  .table {
+    width: 100%;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  .example {
+    font-size: 13px;
+  }
+
+  .simulator {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .simulator h4 {
+    margin-bottom: 4px;
+    font-size: 20px;
+  }
+
+  .sim-note {
+    font-size: 14px;
+    color: var(--color-neutral-800);
+  }
+
+  .sim-label {
+    display: block;
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .sim-count {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  #sim-n-display {
+    font-family: var(--font-heading);
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .sim-unit {
+    font-size: 14px;
+    color: var(--color-neutral-700);
+  }
+
+  #sim-range {
+    width: 100%;
+    margin-top: 12px;
+    accent-color: var(--color-accent);
+  }
+
+  .sim-scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--color-neutral-600);
+  }
+
+  .sim-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .sim-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .sim-checkbox input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-accent);
+  }
+
+  .sim-lines {
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--color-divider);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .sim-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sim-line span:first-child {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sim-line strong {
+    white-space: nowrap;
+  }
+
+  .sim-subtotal {
+    padding-top: 8px;
+    border-top: 1px dashed var(--color-divider);
+  }
+
+  .sim-total-row {
+    margin-top: 18px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sim-total-label {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .sim-total {
+    font-family: var(--font-heading);
+    font-size: 38px;
+    line-height: 1;
+    color: var(--color-accent-700);
+  }
+
+  .simulator .btn-block {
+    margin-top: 22px;
+    padding: 13px;
+  }
+</style>
+
+<script>
+  const euro = (v: number) => v.toLocaleString('fr-FR') + ' €';
+
+  type Ligne = { libelle: string; montant: string };
+
+  function calcul(n: number): { base: number; lignes: Ligne[] } {
+    const lignes: Ligne[] = [{ libelle: "Forfait de base (jusqu'à 49 empl.)", montant: euro(150) }];
+    let base = 150;
+    const tranches = [
+      { de: 50, a: 100, prix: 3 },
+      { de: 101, a: 200, prix: 2 },
+      { de: 201, a: Infinity, prix: 1 },
+    ];
+    for (const t of tranches) {
+      const q = Math.max(0, Math.min(n, t.a) - t.de + 1);
+      if (!q) continue;
+      base += q * t.prix;
+      lignes.push({ libelle: `${q} empl. × ${t.prix} €`, montant: euro(q * t.prix) });
+    }
+    return { base, lignes };
+  }
+
+  const range = document.getElementById('sim-range') as HTMLInputElement;
+  const nDisplay = document.getElementById('sim-n-display')!;
+  const legendeInput = document.getElementById('sim-legende') as HTMLInputElement;
+  const plan3dInput = document.getElementById('sim-plan3d') as HTMLInputElement;
+  const linesEl = document.getElementById('sim-lines')!;
+  const totalEl = document.getElementById('sim-total')!;
+
+  function render() {
+    const n = Number(range.value);
+    nDisplay.textContent = n.toLocaleString('fr-FR');
+
+    const { base, lignes } = calcul(n);
+    const legende = legendeInput.checked;
+    const plan3d = plan3dInput.checked;
+    const total = base + 50 + (legende ? 150 : 0) + (plan3d ? 500 : 0);
+
+    const rows: string[] = lignes.map(
+      (l) => `<div class="sim-line"><span>${l.libelle}</span><strong>${l.montant}</strong></div>`
+    );
+    rows.push(
+      `<div class="sim-line sim-subtotal"><span>Sous-total plan 2D</span><strong>${euro(base)}</strong></div>`
+    );
+    rows.push(`<div class="sim-line"><span>Ouverture de dossier</span><strong>50 €</strong></div>`);
+    if (legende) rows.push(`<div class="sim-line"><span>Légende personnalisée</span><strong>150 €</strong></div>`);
+    if (plan3d) rows.push(`<div class="sim-line"><span>Plan 3D</span><strong>500 €</strong></div>`);
+
+    linesEl.innerHTML = rows.join('');
+    totalEl.textContent = euro(total);
+  }
+
+  range.addEventListener('input', render);
+  legendeInput.addEventListener('change', render);
+  plan3dInput.addEventListener('change', render);
+  render();
+</script>

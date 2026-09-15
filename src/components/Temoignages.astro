@@ -1,0 +1,83 @@
+---
+const temoignages = [
+  {
+    quote: "« Les vacanciers arrivent à l'accueil et trouvent leur emplacement seuls. On a gagné un temps fou en juillet. »",
+    author: 'Direction — Camping Bois Soleil',
+  },
+  {
+    quote: '« Le plan est devenu notre meilleur argument de vente : on le met dans chaque devis de séjour. »',
+    author: 'Direction — Camping Le Grand Pré',
+  },
+  {
+    quote: "« Treize catégories d'hébergements, chacune lisible d'un coup d'œil. Exactement ce qu'on cherchait. »",
+    author: 'Direction — Camping Les Varennes',
+  },
+];
+---
+
+<section class="temoignages">
+  <div class="container">
+    <div class="head">
+      <h6 class="eyebrow">Ils nous font confiance</h6>
+      <span class="tag tag-outline note">Témoignages à valider avant mise en ligne</span>
+    </div>
+    <div class="grid">
+      {temoignages.map((t) => (
+        <blockquote class="quote-card">
+          <p class="quote-text">{t.quote}</p>
+          <footer class="quote-author">{t.author}</footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .temoignages {
+    background: var(--color-accent-2-100);
+    padding: 72px 0;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-2-700);
+    margin: 0;
+  }
+
+  .note {
+    font-size: 11px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    margin-top: 26px;
+  }
+
+  .quote-card {
+    margin: 0;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    padding: 30px 32px;
+  }
+
+  .quote-text {
+    font-size: 17px;
+    font-family: var(--font-heading);
+    line-height: 1.35;
+  }
+
+  .quote-author {
+    font-size: 14px;
+    color: var(--color-neutral-700);
+    margin-top: 14px;
+    font-style: normal;
+  }
+</style>

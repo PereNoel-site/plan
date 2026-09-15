@@ -1,0 +1,219 @@
+---
+interface Props {
+  couleurDevis?: string;
+}
+
+const { couleurDevis = '#2f4038' } = Astro.props;
+---
+
+<section id="devis" class="devis">
+  <div class="panel" style={`background: ${couleurDevis};`}>
+    <div class="panel-text">
+      <h2>Demandez votre devis</h2>
+      <p class="panel-lead">Décrivez-nous votre établissement, nous revenons vers vous avec un prix ferme et un délai de livraison.</p>
+      <div class="contact-block">
+        <a href="mailto:planaunaturel@gmail.com" class="contact-email">planaunaturel@gmail.com</a>
+        <span class="contact-meta">Plan au Naturel — PN Production, France</span>
+      </div>
+    </div>
+
+    <form id="devis-form" novalidate>
+      <div class="field">
+        <label for="f-nom">Nom et établissement</label>
+        <input class="input" id="f-nom" name="nom" type="text" placeholder="Marie Dupont — Camping des Pins" required />
+        <p class="field-error" data-error-for="f-nom" hidden>Merci d'indiquer votre nom et votre établissement.</p>
+      </div>
+      <div class="field">
+        <label for="f-mail">Email</label>
+        <input class="input" id="f-mail" name="email" type="email" placeholder="vous@camping.fr" required />
+        <p class="field-error" data-error-for="f-mail" hidden>Merci d'indiquer une adresse email valide.</p>
+      </div>
+      <div class="field">
+        <label for="f-empl">Nombre d'emplacements</label>
+        <input class="input" id="f-empl" name="emplacements" type="number" min="1" step="1" placeholder="120" />
+        <p class="field-error" data-error-for="f-empl" hidden>Le nombre d'emplacements doit être un entier positif.</p>
+      </div>
+      <div class="field">
+        <label for="f-msg">Votre projet</label>
+        <textarea class="input" id="f-msg" name="message" rows="4" placeholder="Plan 2D, légende à notre charte, et un panneau d'entrée."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="devis-submit">Envoyer ma demande</button>
+      <p class="form-status" id="devis-status" role="status" aria-live="polite"></p>
+      <p class="privacy-note">Aucune donnée transmise à des tiers.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .devis {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .panel {
+    color: #fbf9f5;
+    border-radius: var(--radius-lg);
+    padding: 56px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 44px;
+  }
+
+  .panel-text h2 {
+    font-size: clamp(30px, 3.2vw, 42px);
+    color: var(--color-neutral-100);
+    max-width: 20ch;
+  }
+
+  .panel-lead {
+    margin-top: 14px;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 40ch;
+  }
+
+  .contact-block {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .contact-email {
+    color: #fbf9f5;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .contact-email:hover {
+    text-decoration: underline;
+  }
+
+  .contact-meta {
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .field label {
+    color: #fbf9f5;
+  }
+
+  .field .input {
+    border-radius: 4px;
+  }
+
+  .field-error {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #ffb4a2;
+  }
+
+  textarea.input {
+    resize: vertical;
+  }
+
+  #devis-submit {
+    border-radius: 999px;
+    padding: 13px;
+    margin-top: 4px;
+  }
+
+  #devis-submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
+
+  .form-status {
+    margin: 0;
+    font-size: 13px;
+    min-height: 1em;
+  }
+
+  .form-status[data-state='error'] {
+    color: #ffb4a2;
+  }
+
+  .form-status[data-state='success'] {
+    color: #c9e6b8;
+  }
+
+  .privacy-note {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.68);
+    margin: 0;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('devis-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('devis-submit') as HTMLButtonElement;
+  const status = document.getElementById('devis-status')!;
+
+  const nomInput = document.getElementById('f-nom') as HTMLInputElement;
+  const mailInput = document.getElementById('f-mail') as HTMLInputElement;
+  const emplInput = document.getElementById('f-empl') as HTMLInputElement;
+
+  function setFieldError(id: string, show: boolean) {
+    const el = form.querySelector(`[data-error-for="${id}"]`) as HTMLElement | null;
+    if (el) el.hidden = !show;
+  }
+
+  function validate(): boolean {
+    let valid = true;
+
+    const nomOk = nomInput.value.trim().length > 0;
+    setFieldError('f-nom', !nomOk);
+    if (!nomOk) valid = false;
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mailInput.value.trim());
+    setFieldError('f-mail', !emailOk);
+    if (!emailOk) valid = false;
+
+    if (emplInput.value.trim().length > 0) {
+      const n = Number(emplInput.value);
+      const emplOk = Number.isInteger(n) && n > 0;
+      setFieldError('f-empl', !emplOk);
+      if (!emplOk) valid = false;
+    } else {
+      setFieldError('f-empl', false);
+    }
+
+    return valid;
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!validate()) {
+      status.textContent = 'Merci de corriger les champs signalés.';
+      status.dataset.state = 'error';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours…';
+    status.textContent = '';
+    status.dataset.state = '';
+
+    try {
+      // TODO(dev): brancher sur l'endpoint / service d'email réel du codebase cible.
+      await new Promise((resolve) => setTimeout(resolve, 600));
+
+      submitBtn.textContent = 'Demande envoyée ✓';
+      status.textContent = 'Merci, nous revenons vers vous rapidement.';
+      status.dataset.state = 'success';
+      form.reset();
+    } catch {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer ma demande';
+      status.textContent = "Une erreur est survenue, merci de réessayer ou de nous écrire directement.";
+      status.dataset.state = 'error';
+    }
+  });
+</script>

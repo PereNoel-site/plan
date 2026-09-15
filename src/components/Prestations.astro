@@ -1,0 +1,157 @@
+---
+const offres = [
+  {
+    kicker: 'Le socle',
+    title: 'Plan 2D sur mesure',
+    body: 'Relevé de votre terrain, tracé des allées, numérotation complète des emplacements, bâtiments et services. Livré en fichiers haute définition prêts à imprimer et en version web.',
+    meta: 'Inclus : légende bilingue standard, 2 tours de corrections',
+  },
+  {
+    kicker: 'Identité',
+    title: 'Légende personnalisée',
+    body: 'Pictogrammes dessinés pour vos services, typographie et couleurs reprises de votre charte, catégories d’hébergements différenciées par teinte comme sur vos brochures.',
+    meta: '+150 €',
+  },
+  {
+    kicker: 'Relief',
+    title: 'Plan 3D illustré',
+    body: 'Vue en volume : bâtiments, piscines, végétation et dénivelés. L’outil de vente idéal pour votre page d’accueil et vos supports commerciaux.',
+    meta: '+500 €',
+  },
+];
+
+const options = [
+  {
+    title: 'Plan interactif web',
+    body: 'Emplacements cliquables, recherche par numéro, intégrable sur votre site.',
+    icon: '<rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path>',
+  },
+  {
+    title: 'QR code d’accueil',
+    body: 'Le plan à jour dans la poche du vacancier, dès la barrière.',
+    icon: '<rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3M20 20h.01M17 20h.01M20 17h.01"></path>',
+  },
+  {
+    title: 'Signalétique',
+    body: 'Panneaux d’entrée, totems de carrefour, plaques d’allées, fléchage.',
+    icon: '<path d="M12 22V12"></path><path d="M4 4h13l3 4-3 4H4z"></path>',
+  },
+  {
+    title: 'Mise à jour annuelle',
+    body: 'Nouveaux hébergements, emplacements renumérotés : le plan suit la saison.',
+    icon: '<path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path>',
+  },
+];
+---
+
+<section id="prestations" class="prestations">
+  <div class="container">
+    <h6 class="eyebrow">Prestations</h6>
+    <h2 class="title">Le plan de base, puis tout ce que vous voulez autour</h2>
+
+    <div class="offer-grid">
+      {offres.map((o) => (
+        <div class="card elev-sm">
+          <div class="card-kicker">{o.kicker}</div>
+          <div class="card-title">{o.title}</div>
+          <p class="card-body">{o.body}</p>
+          <div class="card-meta">{o.meta}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="options-panel">
+      <h4>Options</h4>
+      <p class="options-intro">À ajouter à n'importe quelle formule — chiffrées sur devis selon votre établissement.</p>
+      <div class="options-grid">
+        {options.map((o) => (
+          <div class="option">
+            <div class="option-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" set:html={o.icon} />
+            </div>
+            <div>
+              <div class="option-title">{o.title}</div>
+              <div class="option-body">{o.body}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .prestations {
+    background: var(--color-accent-2-100);
+    padding: 72px 0;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-2-700);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(30px, 3.4vw, 42px);
+    max-width: 24ch;
+  }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-top: 36px;
+  }
+
+  .options-panel {
+    margin-top: 22px;
+    background: var(--color-bg);
+    border-radius: var(--radius-lg);
+    padding: 30px 32px;
+  }
+
+  .options-panel h4 {
+    margin-bottom: 6px;
+    font-size: 20px;
+  }
+
+  .options-intro {
+    font-size: 14px;
+    color: var(--color-neutral-800);
+    max-width: 60ch;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+  }
+
+  .option {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .option-icon {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: var(--color-accent-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option-title {
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .option-body {
+    font-size: 14px;
+    color: var(--color-neutral-700);
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+const items = [
+  {
+    q: 'De quoi avez-vous besoin pour démarrer ?',
+    a: 'Un plan existant (même approximatif, même manuscrit), la liste de vos emplacements avec leurs numéros et catégories, et vos éléments de charte graphique si vous en avez. Le reste, nous le reconstituons depuis les vues aériennes.',
+  },
+  {
+    q: 'Vous déplacez-vous sur site ?',
+    a: "Ce n'est pas nécessaire dans la grande majorité des cas. Pour les établissements très accidentés ou en pleine restructuration, un relevé sur place peut être proposé en supplément.",
+  },
+  {
+    q: 'Dans quels formats le plan est-il livré ?',
+    a: 'PDF vectoriel prêt pour l’imprimeur, PNG et JPG haute définition pour le web et les réseaux, plus les déclinaisons nécessaires à vos panneaux. Les fichiers sources restent disponibles pour vos mises à jour.',
+  },
+  {
+    q: 'Que se passe-t-il si le camping change ?',
+    a: 'Nous conservons vos fichiers. Nouveaux hébergements, emplacements renumérotés, service déplacé : la mise à jour est chiffrée sur devis, bien en dessous d’une création complète.',
+  },
+  {
+    q: 'Le plan est-il réutilisable librement ?',
+    a: 'Oui. Vous disposez du plan pour tous vos usages : brochures, site, panneaux, réseaux sociaux, plateformes de réservation.',
+  },
+];
+---
+
+<section id="faq" class="faq">
+  <h6 class="eyebrow">FAQ</h6>
+  <h2 class="title">Les questions qu'on nous pose</h2>
+  <div class="list">
+    {items.map((item) => (
+      <details class="item">
+        <summary>
+          {item.q}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-700)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" class="chevron"><path d="m6 9 6 6 6-6"></path></svg>
+        </summary>
+        <p>{item.a}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 72px 24px;
+  }
+
+  .eyebrow {
+    color: var(--color-accent-700);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: clamp(30px, 3.4vw, 42px);
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .item {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: 20px 26px;
+  }
+
+  .item summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 18px;
+  }
+
+  .chevron {
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+
+  .item p {
+    margin-top: 14px;
+    color: var(--color-neutral-800);
+  }
+</style>

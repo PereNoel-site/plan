@@ -1,0 +1,63 @@
+---
+const stats = [
+  { value: '100 %', title: 'Dessiné sur mesure', body: 'Votre terrain, allée par allée. Jamais de gabarit recyclé.' },
+  { value: '48 h', title: 'Réactivité aux modifications', body: 'Un emplacement déplacé, un service ajouté : votre plan est corrigé en deux jours.' },
+  { value: '3 semaines', title: 'Délai moyen', body: 'Du relevé aux fichiers finaux, hors haute saison.' },
+  { value: '2 langues', title: 'Légende bilingue', body: 'Français et anglais, incluse dans le plan de base.' },
+  { value: '300 dpi', title: 'Print et web', body: "Fichiers haute définition pour l'imprimeur et pour votre site." },
+  { value: '30+', title: "Catégories d'hébergements distinguées", body: 'Chaque gamme repérable à sa teinte, comme dans votre brochure.' },
+  { value: '900+', title: 'Emplacements sur un même plan', body: 'Des petits campings familiaux aux grands domaines multi-secteurs.' },
+  { value: '0 km', title: 'Aucun déplacement nécessaire', body: "Nous travaillons depuis vos plans, photos aériennes et listes d'emplacements." },
+];
+---
+
+<section class="stats">
+  <div class="stats-grid">
+    {stats.map((s) => (
+      <div class="stat-card">
+        <div class="stat-value">{s.value}</div>
+        <div class="stat-title">{s.title}</div>
+        <div class="stat-body">{s.body}</div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .stats {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: 26px 24px;
+  }
+
+  .stat-value {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    line-height: 1;
+    color: var(--color-accent-700);
+  }
+
+  .stat-title {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .stat-body {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--color-neutral-800);
+  }
+</style>
